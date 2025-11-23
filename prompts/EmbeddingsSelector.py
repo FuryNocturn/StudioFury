@@ -28,7 +28,7 @@ class StudioFury_EmbeddingsSelector:
     RETURN_TYPES = ("STRING", "STRING")
     RETURN_NAMES = (get_lang_text("Positive Text", "Texto Positivo"), get_lang_text("Negative Text", "Texto Negativo"))
     FUNCTION = "process"
-    CATEGORY = "Studio Fury/Prompts"
+    CATEGORY = "🧩 Studio Fury/📝 Prompts"
 
     def process(self, selected_data, embedding_list_raw=None):
         pos_stack = []
@@ -48,5 +48,5 @@ NODE_CLASS_MAPPINGS = {
     "StudioFury_EmbeddingsSelector": StudioFury_EmbeddingsSelector
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "StudioFury_EmbeddingsSelector": get_lang_text("Fury Embeddings List", "Fury Lista Embeddings 💉")
+    "StudioFury_EmbeddingsSelector": get_lang_text("Embeddings List 💉", "Lista Embeddings 💉")
 }

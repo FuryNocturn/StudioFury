@@ -31,7 +31,7 @@ class StudioFury_AdvancedPrompt:
     RETURN_TYPES = ("CONDITIONING", "CONDITIONING")
     RETURN_NAMES = (get_lang_text("Positive", "Positivo"), get_lang_text("Negative", "Negativo"))
     FUNCTION = "execute"
-    CATEGORY = "Studio Fury/Prompts"
+    CATEGORY = "🧩 Studio Fury/📝 Prompts"
 
     def execute(self, clip, style, camera, subject, scene, environment, negative_prompt, embeddings_pos="", embeddings_neg=""):
         # 1. Construir Prompt Positivo
@@ -55,5 +55,5 @@ NODE_CLASS_MAPPINGS = {
     "StudioFury_AdvancedPrompt": StudioFury_AdvancedPrompt
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "StudioFury_AdvancedPrompt": get_lang_text("Fury Advanced Prompt", "Fury Prompt Avanzado 📝")
+    "StudioFury_AdvancedPrompt": get_lang_text("Advanced Prompt 📝", "Prompt Avanzado 📝")
 }
