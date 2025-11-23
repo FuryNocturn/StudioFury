@@ -1,6 +1,6 @@
 import locale
 
-# --- CORRECCIÓN: Definimos la función directamente, no una clase ---
+# Ayudante simple de idioma
 def get_lang_text(en, es):
     try:
         sys_lang = locale.getdefaultlocale()[0]
@@ -34,20 +34,21 @@ class StudioFury_AdvancedPrompt:
     CATEGORY = "🧩 Studio Fury/📝 Prompts"
 
     def execute(self, clip, style, camera, subject, scene, environment, negative_prompt, embeddings_pos="", embeddings_neg=""):
-        # 1. Construir Prompt Positivo
+        # 1. Construir Texto
         parts_pos = [embeddings_pos, style, camera, subject, scene, environment]
         final_pos_text = ", ".join([p.strip() for p in parts_pos if p and p.strip() != ""])
 
-        # 2. Construir Prompt Negativo
         parts_neg = [embeddings_neg, negative_prompt]
         final_neg_text = ", ".join([p.strip() for p in parts_neg if p and p.strip() != ""])
 
-        # 3. Codificar con CLIP
+        # 2. Codificar con CLIP (LA CORRECCIÓN ESTÁ AQUÍ)
+        # Usamos return_pooled=True en lugar de return_dict=True
+
         tokens_pos = clip.tokenize(final_pos_text)
-        cond_pos, pooled_pos = clip.encode_from_tokens(tokens_pos, return_dict=True)
+        cond_pos, pooled_pos = clip.encode_from_tokens(tokens_pos, return_pooled=True)
 
         tokens_neg = clip.tokenize(final_neg_text)
-        cond_neg, pooled_neg = clip.encode_from_tokens(tokens_neg, return_dict=True)
+        cond_neg, pooled_neg = clip.encode_from_tokens(tokens_neg, return_pooled=True)
 
         return ([[cond_pos, {"pooled_output": pooled_pos}]], [[cond_neg, {"pooled_output": pooled_neg}]])
 
@@ -55,5 +56,5 @@ NODE_CLASS_MAPPINGS = {
     "StudioFury_AdvancedPrompt": StudioFury_AdvancedPrompt
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "StudioFury_AdvancedPrompt": get_lang_text("Advanced Prompt 📝", "Prompt Avanzado 📝")
+    "StudioFury_AdvancedPrompt": get_lang_text("Fury Advanced Prompt 📝", "Fury Prompt Avanzado 📝")
 }
