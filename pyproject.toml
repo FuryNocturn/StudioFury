@@ -10,7 +10,7 @@ Documentation = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/wiki"
 "Bug Tracker" = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/issues"
 
 [tool.comfy]
-PublisherId = "FuryNocturnTV"
+PublisherId = "furynocturntv"
 DisplayName = "StudioFury"
 Icon = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/blob/master/ico/ICO.png"
 Banner = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/blob/master/ico/Banner.png"
