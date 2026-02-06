@@ -1,7 +1,7 @@
 [project]
 name = "studio-fury"
 description = "Nodos custom, al estilo fury, nodos que añaden versatilidad. con el tiempo ira creciendo los nodos."
-version = "1.2.6"
+version = "1.2.7"
 license = { file = "LICENSE" }
 
 [project.urls]
