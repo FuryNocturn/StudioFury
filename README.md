@@ -1,91 +1,77 @@
-# 🧩 ComfyUI-Studio-Fury
+# 🧩 Studio Fury (v2.0.0)
 
 ![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-Custom_Node-green)
 ![License](https://img.shields.io/github/license/FuryNocturn/ComfyUI-Studio-Fury)
 ![Version](https://img.shields.io/badge/version-1.0.0--r2-orange)
 
----
+### Pro AI Art Direction & Advanced Workflows for ComfyUI
 
-**ComfyUI-Studio-Fury** es una suite de nodos personalizados para [ComfyUI](https://github.com/comfyanonymous/ComfyUI) diseñada para añadir versatilidad y potencia a tus flujos de trabajo. Enfocado en la organización, el soporte multi-idioma y una interfaz visual mejorada.
-
-> *Nodos custom al estilo Fury: potencia, control y simplicidad.*
+**Studio Fury** es una suite profesional de nodos diseñados para transformar ComfyUI en una estación de trabajo de dirección de arte integral. Optimiza la gestión de personajes, escenas y activos mediante una arquitectura de **Bus de Datos (SF_LINK)**, permitiendo flujos de trabajo escalables y organizados.
 
 ---
 
-## ✨ Características Principales
+## 🚀 Características Principales
 
-* **🌐 Soporte Multi-idioma Nativo:** Los nodos detectan automáticamente el idioma de tu sistema. Si estás en español, las entradas y salidas se mostrarán en español; de lo contrario, en inglés.
-* **📂 Arquitectura Modular:** Los nodos están organizados por categorías (`prompts`, `images`, etc.) para mantener tu entorno de trabajo limpio.
-* **🚀 Carga Inteligente de Assets:** Sistema automático de gestión de recursos web (JS/CSS) que evita conflictos y asegura que siempre tengas la última versión de la interfaz visual.
-
----
-
-## 📦 Nodos Incluidos
-
-### 📝 Categoría: Prompts
-
-Herramientas avanzadas para la construcción y gestión de textos para modelos de difusión.
-
-| Nodo | Descripción |
-| :--- | :--- |
-| **Advanced Prompt** 📝| Constructor de prompts modular. Permite separar `Estilo`, `Cámara`, `Sujeto`, `Escena` y `Entorno` en campos dedicados que se concatenan inteligentemente. Incluye sanitización de texto para evitar comas dobles. |
-| **Embeddings List** 💉 | **¡Visual!** Muestra una tabla interactiva con todos tus archivos de *embeddings* detectados. Permite activarlos como positivos o negativos con un solo clic sin tener que escribir sus nombres manualmente. |
+* **Bus de Datos Inteligente (Charged Bus):** Olvídate del "espagueti de cables". El sistema `SF_LINK` empaqueta modelos, CLIP, VAE y entidades en un solo flujo.
+* **Selector Visual de Embeddings:** Interfaz personalizada para gestionar tus embeddings con un solo clic (Positivo/Negativo/Neutral) directamente en el nodo.
+* **Gestión de Proyectos Real:** Sistema de archivos estructurado que organiza automáticamente personajes, escenas y renders en tu carpeta de `output`.
+* **Director Engine:** Motor dinámico para generar entidades (personajes y fondos) de forma masiva con limpieza automática de memoria GPU.
+* **Scene Composer:** Sistema de composición de alta fidelidad con blending de tensores en GPU y control de opacidad/escala.
+* **Action Animator:** Preparación de batches latentes con restricciones de movimiento (Motion Freedom) para flujos de video estables.
 
 ---
 
-## 🛠️ Instalación
+## 📦 Instalación
 
-### Opción A: ComfyUI Manager (Recomendado)
-1.  Busca **"ComfyUI-Studio-Fury"** en la lista de nodos personalizados.
-2.  Haz clic en **Install**.
-3.  Reinicia ComfyUI.
+### Opción 1: ComfyUI Manager (Recomendado)
+* Busca `Studio Fury` en la base de datos del Manager e instálalo directamente.
 
-### Opción B: Instalación Manual (Git)
-Si prefieres la línea de comandos, clona este repositorio dentro de tu carpeta `custom_nodes`:
-
-```bash
-
-cd ComfyUI/custom_nodes/
-git clone [https://github.com/FuryNocturn/ComfyUI-Studio-Fury.git](https://github.com/FuryNocturn/ComfyUI-Studio-Fury.git) 
-```
-Luego reinicia tu ComfyUI.
-
----
-
-## 📂 Estructura del Proyecto
-Este pack utiliza una estructura de archivos híbrida para facilitar el desarrollo y la estabilidad:
-
-```
-
-ComfyUI-Studio-Fury/
-├── prompts/           # Nodos relacionados con texto
-├── images/            # (Próximamente) Nodos de imagen
-├── js/                # Recursos Javascript globales
-└── __init__.py        # Cargador dinámico inteligente
-
-```
+### Opción 2: Instalación Manual
+1.  Navega a tu carpeta de nodos personalizados:
+    ```bash
+    cd ComfyUI/custom_nodes/
+    ```
+2.  Clona el repositorio:
+    ```bash
+    git clone [https://github.com/FuryNocturn/ComfyUI-Studio-Fury.git](https://github.com/FuryNocturn/ComfyUI-Studio-Fury.git)
+    ```
+3.  Instala las dependencias necesarias:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ---
 
-## 🤝 Contribuir
-¡Las contribuciones son bienvenidas! Si tienes una idea para un nuevo nodo o una mejora:
+## 🛠️ Nodos Incluidos
 
-1. Haz un Fork del proyecto.
+### 📦 Dataset & Project
+- **Project Manager:** Inicializa tu proyecto y define el VAE/CLIP base.
+- **Add Entity:** Registra personajes o escenas con prompts específicos y configuraciones de Aspect Ratio.
+- **Smart Saver:** Guarda tus activos en formato técnico `.fury` (tensores serializados) y previsualización `.png`.
 
-2. Crea una nueva rama (git checkout -b feature/NuevaCaracteristica).
+### 📝 Prompts
+- **Advanced Prompt:** Constructor de prompts profesional dividido por: Calidad, Estilo, Cámara, Sujeto y Entorno.
+- **Embeddings Selector:** El gestor visual definitivo para tus archivos de embeddings.
 
-3. Añade tu nodo en la carpeta de categoría correspondiente (ej: prompts/).
-
-4. Haz Commit y Push.
-
-5. Abre un Pull Request.
+### 🎬 Director & Render
+- **Director Engine:** El cerebro del renderizado masivo.
+- **Fury Sampler:** Sampler optimizado con integración directa al bus de datos.
+- **Scene Composer:** Montaje de personajes sobre fondos con control espacial.
+- **Action Animator:** Generador de latentes para animación con máscara de restricción de ruido.
 
 ---
 
-## 📄 Licencia
-Este proyecto está bajo la licencia MIT.
+## ⚙️ Control de Sistema
+Studio Fury añade herramientas administrativas al menú superior de ComfyUI:
+* **🔄 Restart Server:** Reinicia el servidor de ComfyUI sin cerrar la terminal.
+* **🛑 Shutdown Server:** Apaga completamente la instancia de ComfyUI de forma segura.
 
 ---
 
-Creado con ❤️ por FuryNocturnTV
+## 🤝 Contribuciones
+¡Las contribuciones son bienvenidas! Si tienes ideas para nuevos nodos basados en el sistema de Bus o mejoras en la interfaz JS, no dudes en abrir un *Issue* o enviar un *Pull Request*.
+
+**Autor:** [FuryNocturn](https://github.com/FuryNocturn)  
+**Licencia:** MIT  
+**Versión:** 2.0.0
