@@ -4,13 +4,13 @@
 <p align="center">
   <a href="README.md"><b>Español 🇪🇸</b></a> | 
   <a href="README_EN.md"><b>English 🇺🇸</b></a> | 
-  <a href="/wiki/es_wiki.md"><b>Documentation / Wiki 📖</b></a>
+  <a href="https://github.com/FuryNocturn/StudioFury/wiki"><b>Documentation / Wiki 📖</b></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.12%2B-blue" alt="Python Version">
   <img src="https://img.shields.io/badge/ComfyUI-Custom_Node_Suite-green" alt="ComfyUI">
-  <img src="https://img.shields.io/github/license/FuryNocturn/ComfyUI-Studio-Fury" alt="License">
+  <img src="https://img.shields.io/github/license/FuryNocturn/StudioFury" alt="License">
   <img src="https://img.shields.io/badge/version-2.0.0-orange" alt="Version">
 </p>
 

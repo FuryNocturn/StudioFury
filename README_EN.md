@@ -5,13 +5,13 @@
 <p align="center">
   <a href="README.md"><b>Español 🇪🇸</b></a> | 
   <a href="README_EN.md"><b>English 🇺🇸</b></a> | 
-  <a href="/wiki/en_wiki.md"><b>Documentation / Wiki 📖</b></a>
+  <a href="https://github.com/FuryNocturn/StudioFury/wiki"><b>Documentation / Wiki 📖</b></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.12%2B-blue" alt="Python Version">
   <img src="https://img.shields.io/badge/ComfyUI-Custom_Node_Suite-green" alt="ComfyUI">
-  <img src="https://img.shields.io/github/license/FuryNocturn/ComfyUI-Studio-Fury" alt="License">
+  <img src="https://img.shields.io/github/license/FuryNocturn/StudioFury" alt="License">
   <img src="https://img.shields.io/badge/version-2.0.0-orange" alt="Version">
 </p>
 
@@ -45,7 +45,7 @@ Advanced tools for building and managing text for broadcast models.
 ### 📦 Category: Dataset & Project
 Asset management, data persistence, and project organization.
 
-| Node | Description |
+| Nodo | Descripción |
 | :--- | :--- |
 **Project Manager** 📂 | The root node. Initializes the data bus (`SF_LINK`), defines the project name, and centralizes the VAE and CLIP to maintain consistency throughout the workflow. |
 **Add Entity** 👤 | Registers characters or scenes on the bus. Allows you to configure the `Aspect Ratio` and immediately encodes prompts for processing by the director's engine. |
@@ -55,7 +55,7 @@ Asset management, data persistence, and project organization.
 ### 🎬 Category: Director
 Execution engine and high-fidelity artistic compositing tools.
 
-| Node | Description |
+| Nodo | Descripción |
 | :--- | :--- |
 | **Director Engine** 🧠 | The massive rendering brain. Processes all entities on the bus sequentially, managing VRAM and automatically freeing memory to prevent system errors. |
 | **Fury Sampler** 🎨 | Bus-injected optimized sampler. Allows for the generation of specific entity IDs individually, integrating rendering metadata into the workflow. |

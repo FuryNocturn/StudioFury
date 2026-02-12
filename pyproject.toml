@@ -1,17 +1,17 @@
 [project]
-name = "studio-fury"
+name = "studiofury"
 description = "Suite profesional para dirección de arte y flujos de trabajo avanzados en ComfyUI."
-version = "2.0.3"
+version = "2.0.4"
 license = { file = "LICENSE" }
 dependencies = ["torch", "pillow", "numpy", "aiohttp"]
 
 [project.urls]
-Repository = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury"
-Documentation = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/wiki"
-"Bug Tracker" = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/issues"
+Repository = "https://github.com/FuryNocturn/StudioFury"
+Documentation = "https://github.com/FuryNocturn/StudioFury/wiki"
+"Bug Tracker" = "https://github.com/FuryNocturn/StudioFury/issues"
 
 [tool.comfy]
 PublisherId = "furynocturntv"
 DisplayName = "StudioFury"
-Icon = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/blob/master/ico/ICO.png"
-Banner = "https://github.com/FuryNocturn/ComfyUI-Studio-Fury/blob/master/ico/Banner.png"
+Icon = "https://github.com/FuryNocturn/StudioFury/blob/master/ico/ICO.png"
+Banner = "https://github.com/FuryNocturn/StudioFury/blob/master/ico/Banner.png"
