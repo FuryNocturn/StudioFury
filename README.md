@@ -1,9 +1,18 @@
-# 🧩 ComfyUI-Studio-Fury
+# 🧩 StudioFury
+### Dirección artística de IA profesional y suite de flujo de trabajo avanzado para ComfyUI
 
-![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)
-![ComfyUI](https://img.shields.io/badge/ComfyUI-Custom_Node-green)
-![License](https://img.shields.io/github/license/FuryNocturn/ComfyUI-Studio-Fury)
-![Version](https://img.shields.io/badge/version-1.0.0--r2-orange)
+<p align="center">
+  <a href="README.md"><b>Español 🇪🇸</b></a> | 
+  <a href="README_EN.md"><b>English 🇺🇸</b></a> | 
+  <a href="/wiki/es_wiki.md"><b>Documentation / Wiki 📖</b></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.12%2B-blue" alt="Python Version">
+  <img src="https://img.shields.io/badge/ComfyUI-Custom_Node_Suite-green" alt="ComfyUI">
+  <img src="https://img.shields.io/github/license/FuryNocturn/ComfyUI-Studio-Fury" alt="License">
+  <img src="https://img.shields.io/badge/version-2.0.0-orange" alt="Version">
+</p>
 
 ---
 
@@ -14,23 +23,42 @@
 ---
 
 ## ✨ Características Principales
-
-* **🌐 Soporte Multi-idioma Nativo:** Los nodos detectan automáticamente el idioma de tu sistema. Si estás en español, las entradas y salidas se mostrarán en español; de lo contrario, en inglés.
-* **📂 Arquitectura Modular:** Los nodos están organizados por categorías (`prompts`, `images`, etc.) para mantener tu entorno de trabajo limpio.
-* **🚀 Carga Inteligente de Assets:** Sistema automático de gestión de recursos web (JS/CSS) que evita conflictos y asegura que siempre tengas la última versión de la interfaz visual.
+* **🌐 Compatibilidad multilingüe nativa:** Los nodos detectan automáticamente el idioma de su sistema. Las etiquetas y descripciones se ajustan al español o al inglés según corresponda.
+* **🚌 Arquitectura SF_LINK (Bus Cargado):** Elimine el cableado desordenado. Nuestro sistema de bus de datos transporta modelos, CLIP, VAE y metadatos de entidades a través de un único flujo consolidado.
+* **📂 Arquitectura modular:** Los nodos se organizan en categorías especializadas (`prompts`, `dataset`, `director`, etc.) para mantener su espacio de trabajo profesional y ordenado.
+* **🚀 Gestión inteligente de activos:** La sincronización automática de recursos web (JS/CSS) garantiza que la interfaz visual esté siempre actualizada y sin conflictos.
 
 ---
 
 ## 📦 Nodos Incluidos
 
 ### 📝 Categoría: Prompts
-
 Herramientas avanzadas para la construcción y gestión de textos para modelos de difusión.
 
 | Nodo | Descripción |
 | :--- | :--- |
-| **Advanced Prompt** 📝| Constructor de prompts modular. Permite separar `Estilo`, `Cámara`, `Sujeto`, `Escena` y `Entorno` en campos dedicados que se concatenan inteligentemente. Incluye sanitización de texto para evitar comas dobles. |
-| **Embeddings List** 💉 | **¡Visual!** Muestra una tabla interactiva con todos tus archivos de *embeddings* detectados. Permite activarlos como positivos o negativos con un solo clic sin tener que escribir sus nombres manualmente. |
+| **Advanced Prompt** 📝| Constructor de prompts modular. Divide el flujo en `Calidad`, `Estilo`, `Cámara`, `Sujeto` y `Entorno`. Incluye sanitización automática para evitar errores de sintaxis en el prompt final. |
+| **Embeddings Selector** 💉 | **¡Interfaz Visual!** Muestra una tabla interactiva con todos tus *embeddings*. Permite clasificarlos como Positivos (P) o Negativos (N) con un clic, eliminando la necesidad de escribir rutas manualmente. |
+
+### 📦 Categoría: Dataset & Project
+Gestión de activos, persistencia de datos y organización del proyecto.
+
+| Nodo | Descripción |
+| :--- | :--- |
+| **Project Manager** 📂 | El nodo raíz. Inicializa el bus de datos (`SF_LINK`), define el nombre del proyecto y centraliza el VAE y CLIP para mantener la consistencia en todo el flujo. |
+| **Add Entity** 👤 | Registra personajes o escenas en el bus. Permite configurar el `Aspect Ratio` y codifica los prompts inmediatamente para ser procesados por el motor del director. |
+| **Smart Saver** 💾 | Gestión de exportación. Guarda tus resultados en formato técnico `.fury` (preservando tensores y latentes) y genera una previsualización `.png` organizada por categorías. |
+| **Asset Loader** 📥 | Recupera activos guardados. Carga tanto la imagen como el espacio latente original de archivos `.fury` para realizar refinamientos, inpainting o variaciones. |
+
+### 🎬 Categoría: Director
+Motor de ejecución y herramientas de composición artística de alta fidelidad.
+
+| Nodo | Descripción |
+| :--- | :--- |
+| **Director Engine** 🧠 | El cerebro de renderizado masivo. Procesa todas las entidades del bus secuencialmente, gestionando la VRAM y liberando memoria automáticamente para evitar errores de sistema. |
+| **Fury Sampler** 🎨 | Sampler optimizado con inyección de bus. Permite generar IDs específicos de entidades de forma individual, integrando metadatos de renderizado en el flujo de trabajo. |
+| **Scene Composer** 🖼️ | Herramienta de montaje de precisión. Coloca personajes sobre fondos con control total de `Escala`, `Coordenadas X/Y` y `Opacidad` mediante blending de tensores en GPU. |
+| **Action Animator** 📽️ | Generador de flujos de video. Convierte composiciones estáticas en batches latentes, aplicando máscaras de `Motion Freedom` para restringir el movimiento a áreas específicas. |
 
 ---
 
@@ -59,12 +87,22 @@ Este pack utiliza una estructura de archivos híbrida para facilitar el desarrol
 ```
 
 ComfyUI-Studio-Fury/
-├── prompts/           # Nodos relacionados con texto
-├── images/            # (Próximamente) Nodos de imagen
-├── js/                # Recursos Javascript globales
-└── __init__.py        # Cargador dinámico inteligente
+├── prompts/           # Nodos relacionados con texto, construcción de prompts y gestión de embeddings.
+├── Core/              # Lógica central del sistema: gestión de archivos (I/O), serialización .fury y bus SF_LINK.
+├── dataset/           # Gestión de proyectos, persistencia de activos (Smart Saver) y carga de recursos.
+├── director/          # Motores de renderizado (Engine), samplers personalizados y control de flujo secuencial.
+├── images/            # (Próximamente) Nodos de composición visual, mezcla de tensores y post-procesado.
+├── Interface/         # Recursos Javascript globales, menús de sistema (Restart/Shutdown) y extensiones visuales.
+└── __init__.py        # Cargador dinámico inteligente y punto de entrada para el registro de nodos en la API.
 
 ```
+---
+## ⚙️ Herramientas de Sistema
+Studio Fury extiende el menú de control de ComfyUI para mejorar la gestión del servidor:
+
+🔄 Restart Server: Reinicia la instancia de ComfyUI para refrescar nodos o liberar memoria del sistema sin cerrar la terminal de comandos.
+
+🛑 Shutdown Server: Realiza un apagado seguro y controlado de la instancia activa del servidor.
 
 ---
 
