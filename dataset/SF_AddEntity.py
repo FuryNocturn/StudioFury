@@ -1,4 +1,6 @@
+import copy
 import torch
+
 
 class SF_AddEntity:
     """
@@ -15,7 +17,6 @@ class SF_AddEntity:
                 "fury_bus": ("SF_LINK",),
                 "entity_type": (["character", "scene"],),
                 "entity_id": ("STRING", {"default": "Hero", "placeholder": "ID (ej: Batman)"}),
-                # Selector de formato
                 "scene_orientation": (["Landscape (16:9)", "Portrait (9:16)", "Square (1:1)", "Cinematic (21:9)", "IMAX (1.90:1)"],),
                 "positive_prompt": ("STRING", {"default": "", "multiline": True}),
                 "negative_prompt": ("STRING", {"default": "", "multiline": True}),
@@ -28,33 +29,33 @@ class SF_AddEntity:
     CATEGORY = "🧩 Studio Fury/📦 Dataset"
 
     def add_and_encode(self, fury_bus, entity_type, entity_id, scene_orientation, positive_prompt, negative_prompt):
-        new_bus = fury_bus.copy()
-        new_bus["entities"] = fury_bus["entities"].copy()
+        # deepcopy garantiza que todos los tensores de condicionamiento
+        # de entidades anteriores sean copias independientes en memoria,
+        # evitando que operaciones in-place downstream corrompan el bus original.
+        new_bus = copy.deepcopy(fury_bus)
 
         clean_id = entity_id.strip()
-        if not clean_id: return (new_bus,)
+        if not clean_id:
+            return (new_bus,)
 
-        # 1. Lógica de Ratio (Personajes siempre verticales)
+        # Lógica de ratio
         if entity_type == "character":
-            ratio_tag = "character_sheet" # Forzamos vertical 2:3 internamente
+            ratio_tag = "character_sheet"
         else:
             ratio_tag = scene_orientation
 
-        # 2. Recuperar CLIP del Bus
-        runtime = new_bus.get("runtime", {})
-        clip = runtime.get("clip")
-
+        # Recuperar CLIP del bus
+        clip = new_bus.get("runtime", {}).get("clip")
         if clip is None:
             raise ValueError("❌ Error: No hay CLIP en el Bus. Conecta el CLIP al 'Project Manager'.")
 
-        # 3. Procesamiento de Texto
-        final_pos = positive_prompt if positive_prompt.strip() else f"high quality {entity_type} of {clean_id}"
-
-        # Inyección de ayuda para personajes
+        # Construcción del prompt positivo
+        final_pos = positive_prompt.strip() if positive_prompt.strip() else f"high quality {entity_type} of {clean_id}"
         if entity_type == "character":
             final_pos += ", full body view, standing pose, neutral background"
 
         print(f"⚡ [AddEntity] Cocinando: '{clean_id}' ({ratio_tag})")
+        print(f"   Prompt positivo final: {final_pos}")
 
         try:
             tokens_pos = clip.tokenize(final_pos)
@@ -63,25 +64,25 @@ class SF_AddEntity:
             cond_pos, pooled_pos = clip.encode_from_tokens(tokens_pos, return_pooled=True)
             cond_neg, pooled_neg = clip.encode_from_tokens(tokens_neg, return_pooled=True)
 
-            # 4. Guardar Entidad Lista
             new_bus["entities"][clean_id] = {
-                "id": clean_id,
-                "type": entity_type,
-                "name": clean_id,
+                "id":        clean_id,
+                "type":      entity_type,
+                "name":      clean_id,
                 "ratio_tag": ratio_tag,
-                "raw_pos": final_pos,
-                "cond_pos": [[cond_pos, {"pooled_output": pooled_pos}]],
-                "cond_neg": [[cond_neg, {"pooled_output": pooled_neg}]]
+                "raw_pos":   final_pos,
+                "cond_pos":  [[cond_pos, {"pooled_output": pooled_pos}]],
+                "cond_neg":  [[cond_neg, {"pooled_output": pooled_neg}]],
             }
+
         except Exception as e:
-            print(f"❌ Error codificando {clean_id}: {e}")
+            print(f"❌ Error codificando '{clean_id}': {e}")
 
         return (new_bus,)
 
-        # --- REGISTRO DEL NODO ---
-        NODE_CLASS_MAPPINGS = {
-            "SF_AddEntity": SF_AddEntity
-        }
-        NODE_DISPLAY_NAME_MAPPINGS = {
-            "SF_AddEntity": "2️⃣ SF Add Entity (Builder)"
-        }
+
+NODE_CLASS_MAPPINGS = {
+    "SF_AddEntity": SF_AddEntity
+}
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "SF_AddEntity": "2️⃣ SF Add Entity (Builder)"
+}
